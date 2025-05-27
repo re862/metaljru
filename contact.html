@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>metaljru.com</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" />
+  <link rel="stylesheet" href="contact.css" />
+  <!-- Add in your HTML -->
+  <audio id="alertSound" src="https://www.myinstants.com/media/sounds/metal-gear-solid-alert.mp3" preload="auto"></audio>
+  <audio id="blip" src="https://assets.mixkit.co/sfx/preview/mixkit-typewriter-soft-click-1126.mp3" preload="auto"></audio>
+  <audio id="transmit-sound" src="beep-beep-beep-beep-80262.mp3" preload="auto"></audio>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="scanlines"></div>
+  <nav class="mg-nav">
+    
+    <div class="logo">
+        <img src="your-logo.png" alt="Logo">
+    </div>
+
+    <ul class="nav-list">
+      
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skill.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      
+    </ul>
+  </nav>
+
+
+  <section id="contact" class="contact-section">
+  <div class="contact-container">
+    <!-- LEFT: Contact Form -->
+    <div class="contact-form-area">
+      <h2>CONTACT</h2>
+      <form class="contact-form" action="https://formspree.io/f/xldbdlkg" method="POST">
+  <label for="name">NAME</label>
+  <input type="text" id="name" name="name" required />
+
+  <label for="email">EMAIL</label>
+  <input type="email" id="email" name="email" required />
+
+  <label for="message">MESSAGE</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
+
+  <button type="submit" class="codec-button">SEND MESSAGE</button>
+</form>
+
+    </div>
+
+    <div id="transmitting-overlay" class="transmitting hidden">
+  <p>📡 TRANSMITTING...</p>
+</div>
+
+
+    <!-- RIGHT: Social Links -->
+    <div class="social-links-area">
+      <h3>SOCIAL CHANNELS</h3>
+      <div class="social-links">
+        <a href="https://www.facebook.com/jerome.iyong.2024/" target="_blank">
+          <img src="facebook.svg" alt="Facebook" />
+          Jerome Iyong
+        </a>
+        <a href="https://www.tiktok.com/@archangel.jerome" target="_blank">
+          <img src="tiktok.svg" alt="TikTok" />
+          archangel.jerome Archangel Jerome
+        </a>
+        <a href="https://www.youtube.com/@Lt.Llaaffttiffyooooo" target="_blank">
+          <img src="youtube.svg" alt="YouTube" />
+          Lt.Llaaffttiffyooooo!!!!!
+        </a>
+        <a href="https://instagram.com/yourusername" target="_blank">
+          <img src="instagram.svg" alt="Instagram" />
+          Instagram
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank">
+          <img src="x.svg" alt="Twitter" />
+          Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW: Phone + Address -->
+  <div class="bottom-contact-info">
+    <a href="tel:+123456789">
+      <img src="googlecloudspanner.svg" alt="Phone" />
+      +63 962-447-47-74
+    </a>
+    <a href="https://maps.google.com/?q=Your+Address" target="_blank">
+      <img src="esphome.svg" alt="Address" />
+      Mangaldan , Phillippines
+    </a>
+  </div>
+</section>
+
+
+
+
+  <div class="codec-ui" id="codec">
+  <div class="codec-panel">
+    <img src="your-profile.jpg" alt="Snake" class="codec-avatar" />
+    <div class="codec-text" id="codecText"></div>
+    <img src="your-profile.jpg" alt="Colonel" class="codec-avatar flipped" />
+  </div>
+  </div>
+
+
+  <script src="contact.js"></script>
+
+  <audio id="codec-beep" src="sounds/codec-beep.mp3" preload="auto"></audio>
+
+<script>
+  const fields = document.querySelectorAll(".contact-form input, .contact-form textarea");
+  const beep = document.getElementById("codec-beep");
+
+  fields.forEach(field => {
+    field.addEventListener("focus", () => {
+      if (beep) {
+        beep.currentTime = 0;
+        beep.play();
+      }
+    });
+  });
+</script>
+
+<script>
+  const form = document.querySelector('.contact-form');
+  const overlay = document.getElementById('transmitting-overlay');
+  const sound = document.getElementById('transmit-sound');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Play codec sound
+    if (sound) {
+  sound.currentTime = 0;
+  sound.play().catch(err => {
+    console.warn("Sound playback failed:", err);
+  });
+
+  // Stop playback after 5 seconds
+  setTimeout(() => {
+    sound.pause();
+    sound.currentTime = 0;
+  }, 3000);
+}
+
+
+    // Show transmitting overlay
+    overlay.classList.remove('hidden');
+
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.reset();
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        alert("✅ Codec transmission sent.");
+      }, 1500);
+    } else {
+      overlay.classList.add('hidden');
+      alert("⚠️ Codec error — transmission failed.");
+    }
+  });
+</script>
+
+
+<audio id="transmit-sound" src="radar_ping copy.mp3" preload="auto"></audio>
+
+
+
+
+
+</body>
+</html>

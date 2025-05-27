@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>metaljru.com</title>
+  <link rel="icon" type="image/png" href="favicon-32x32.png" />
+  <link rel="stylesheet" href="skill.css" />
+  <!-- Add in your HTML -->
+  <audio id="alertSound" src="https://www.myinstants.com/media/sounds/metal-gear-solid-alert.mp3" preload="auto"></audio>
+  <audio id="blip" src="https://assets.mixkit.co/sfx/preview/mixkit-typewriter-soft-click-1126.mp3" preload="auto"></audio>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="scanlines"></div>
+  <nav class="mg-nav">
+    
+    <div class="logo">
+        <img src="your-logo.png" alt="Logo">
+    </div>
+
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skill.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+
+<section class="skills-section" id="skills">
+  <div class="codec-frame">
+    <h2>SKILLS</h2>
+
+    <div class="skill">
+  <div class="skill-label">
+    <div class="radar-blip"></div>
+    <label>HTML</label>
+    <span class="percent">85%</span>
+  </div>
+  <div class="skill-container">
+    <div class="skill-bar1">
+      <div class="fill" style="width: 85%"></div>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="skill">
+  <div class="skill-label">
+    <div class="radar-blip"></div>
+    <label>CSS</label>
+    <span class="percent">80%</span>
+  </div>
+  <div class="skill-container">
+    <div class="skill-bar2">
+      <div class="fill" style="width: 80%"></div>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="skill">
+  <div class="skill-label">
+    <div class="radar-blip"></div>
+    <label>JavaScript</label>
+    <span class="percent">70%</span>
+  </div>
+  <div class="skill-container">
+    <div class="skill-bar3">
+      <div class="fill" style="width: 70%"></div>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="skill">
+  <div class="skill-label">
+    <div class="radar-blip"></div>
+    <label>Canvas & Audio</label>
+    <span class="percent">75%</span>
+  </div>
+  <div class="skill-container">
+    <div class="skill-bar4">
+      <div class="fill" style="width: 75%"></div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+  <div class="codec-ui" id="codec">
+  <div class="codec-panel">
+    <img src="your-profile.jpg" alt="Snake" class="codec-avatar" />
+    <div class="codec-text" id="codecText"></div>
+    <img src="your-profile.jpg" alt="Colonel" class="codec-avatar flipped" />
+  </div>
+  </div>
+
+
+  <script src="skill.js"></script>
+  <audio id="ping-audio" src="radar_ping.mp3" preload="auto"></audio>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("ping-audio");
+    const skills = document.querySelectorAll(".skill");
+
+    skills.forEach((skill, i) => {
+      const fill = skill.querySelector(".fill");
+      const blip = skill.querySelector(".radar-blip");
+
+      const targetWidth = fill.getAttribute("data-width");
+
+      setTimeout(() => {
+        fill.style.transition = "width 1.2s ease-out";
+        fill.style.width = targetWidth;
+
+        if (blip) blip.style.opacity = "1";
+
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play();
+        }
+      }, 1000 + i * 800);
+    });
+  });
+</script>
+
+
+
+
+</body>
+</html>
